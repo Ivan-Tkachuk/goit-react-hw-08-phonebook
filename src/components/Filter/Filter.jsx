@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setStatusFilter } from '../../redux/filterSlice';
-import { selectFilter } from 'redux/selectors';
+import { setStatusFilter } from '../../redux/contacts/filterSlice';
+import { selectFilter } from 'redux/contacts/selectors';
 
 import { Label, Input } from './Filter.styled';
 

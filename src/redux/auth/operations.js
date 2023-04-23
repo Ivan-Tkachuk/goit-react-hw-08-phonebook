@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-// axios.defaults.baseURL = 'https://goit-task-manager.herokuapp.com/';
-
+import Notiflix from 'notiflix';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
@@ -47,6 +45,9 @@ export const logIn = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
+      Notiflix.Notify.failure(`Sorry, user not found.`, {
+        position: 'center-top',
+      });
       return thunkAPI.rejectWithValue(error.message);
     }
   }

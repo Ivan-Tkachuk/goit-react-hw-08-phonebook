@@ -1,17 +1,16 @@
-// import { useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-// import { TaskList } from 'components/TaskList/TaskList';
-// import { TaskEditor } from 'components/TaskEditor/TaskEditor';
-// import { fetchTasks } from 'redux/tasks/operations';
-// import { selectLoading } from 'redux/tasks/selectors';
-
 
 import { ContactForm } from '../components/ContactForm/ContactForm';
 import ContactList from '../components/ContactList/ContactList';
 import Filter from '../components/Filter/Filter';
 
 // import { Container } from './App.styled';
+
+import Typography from '@mui/material/Typography';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,14 +28,27 @@ export default function Contacts() {
   return (
     <HelmetProvider>
       <Helmet>
-       <title>Phonebook</title>
-       </Helmet>
-       <h1>Phonebook</h1>
-       <ContactForm />
-       <h2>Contacts</h2>
-       <Filter />
-       <div>{isLoading && 'Request in progress...'}</div>
-       <ContactList />
-       </HelmetProvider>
+        <title>Phonebook</title>
+      </Helmet>
+      <CssBaseline />
+      <Container maxWidth="sm">
+        <Typography
+          component="h1"
+          variant="h3"
+          align="center"
+          color="text.primary"
+          gutterBottom
+          marginTop="32px"
+        >
+          Phonebook
+        </Typography>
+        <ContactForm />
+        <Filter />
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          {isLoading && <CircularProgress />}
+        </Box>
+        <ContactList />
+      </Container>
+    </HelmetProvider>
   );
 }

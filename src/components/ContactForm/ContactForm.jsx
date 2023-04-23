@@ -2,10 +2,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { selectContacts } from 'redux/contacts/selectors';
 
-import { Form, FormField, Field, Button } from './ContactForm.styled';
+// import { Form, FormField, Field, Button } from './ContactForm.styled';
 import { nanoid } from 'nanoid';
 
 import { addContact } from 'redux/contacts/operations';
+
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -42,34 +48,53 @@ export const ContactForm = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <FormField>
-        Name
-        <Field
-          type="text"
+    <Box sx={{ minWidth: 275, textAlign: 'center' }}>
+      <CssBaseline />
+
+      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+        <TextField
+          autoComplete="given-name"
+          margin="normal"
           name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
-          placeholder="Enter contact name..."
+          fullWidth
+          id="name"
+          label="Name"
+          type="text"
+          variant="standard"
+          autoFocus
+          inputProps={{
+            pattern: "[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)",
+            title:
+              "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan",
+          }}
           value={name}
           onChange={handleChange}
         />
-      </FormField>
-      <FormField>
-        Phone
-        <Field
-          type="tel"
+        <TextField
+          autoComplete="given-name"
+          margin="normal"
           name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
-          placeholder="Enter phone number..."
+          fullWidth
+          id="number"
+          label="Phone number"
+          type="string"
+          variant="standard"
+          autoFocus
+          inputProps={{
+            pattern: `[0-9, +, -]{5,20}`,
+            title:
+              'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +',
+          }}
           value={number}
           onChange={handleChange}
         />
-      </FormField>
-      <Button type="submit">Add Contact</Button>
-    </Form>
+
+        <IconButton size="large" color="primary" type="submit">
+          <AddCircleOutlinedIcon fontSize="large" />
+        </IconButton>
+      </Box>
+    </Box>
   );
 };
